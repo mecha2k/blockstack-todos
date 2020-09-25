@@ -1,21 +1,21 @@
-import React from 'react';
-import { Flex, Box, Text } from '@blockstack/ui';
-import { useConnect } from '@blockstack/connect';
-import { Logo } from './icons/logo';
-import { Person } from 'blockstack';
+import React from "react"
+import { Flex, Box, Text } from "@blockstack/ui"
+import { useConnect } from "@blockstack/connect"
+import { Logo } from "./icons/logo"
+import { Person } from "blockstack"
 
 const Auth = () => {
-  const { authOptions } = useConnect();
-  const { userSession } = authOptions;
+  const { authOptions } = useConnect()
+  const { userSession } = authOptions
 
   if (!userSession.isUserSignedIn()) {
-    return null;
+    return null
   }
 
-  const userData = userSession.loadUserData();
+  const userData = userSession.loadUserData()
 
   const Avatar = () => {
-    const person = new Person(userData.profile);
+    const person = new Person(userData.profile)
     if (person.avatarUrl()) {
       return (
         <Box
@@ -25,14 +25,13 @@ const Auth = () => {
           display="inline-block"
           overflow="hidden"
           mr={2}
-          style={{ position: 'relative', top: '6px' }}
-        >
+          style={{ position: "relative", top: "6px" }}>
           <Box as="img" src={person.avatarUrl()} maxWidth="100%" minHeight="24px" minWidth="24px" />
         </Box>
-      );
+      )
     }
-    return null;
-  };
+    return null
+  }
 
   return (
     <Box>
@@ -45,26 +44,25 @@ const Auth = () => {
         color="ink.400"
         cursor="pointer"
         onClick={() => {
-          userSession.signUserOut();
-          window.location = '/';
-        }}
-      >
+          userSession.signUserOut()
+          window.location = "/"
+        }}>
         Sign out
       </Text>
     </Box>
-  );
-};
+  )
+}
 
 export const Header = () => {
   return (
     <Flex width="100%" justifyContent="space-between" px={4} py={3}>
-      <Box alignItems onClick={() => (document.location = '/')} cursor="pointer">
-        <Logo style={{ position: 'relative', top: '-1px' }} />
+      <Box alignItems onClick={() => (document.location = "/")} cursor="pointer">
+        <Logo style={{ position: "relative", top: "-1px" }} />
         <Text ml={2} display="inline-block" fontWeight="600">
           To-do
         </Text>
       </Box>
       <Auth />
     </Flex>
-  );
-};
+  )
+}
